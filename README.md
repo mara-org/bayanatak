@@ -1,37 +1,23 @@
 # Bayanatak
 
-Saudi test data, without using real Saudi people as test data.
+Saudi-flavored fake test data for local product development.
 
-If you are building for Saudi users and your demo still says `John Doe`, your test data is lying to you.
+Bayanatak is a tiny local CLI that generates safe fake records for Saudi-facing products:
+Arabic names, Saudi cities and neighborhoods, addresses, checkout payloads, SAR totals, VAT,
+payment methods, and form fixtures.
 
-Arabic names break layouts differently. Saudi phone fields need different validation. Cities,
-neighborhoods, addresses, VAT, payment flows, and Arabic form labels all expose bugs that generic
-fake data will never catch.
+No API. No scraping. No database. No LLM. No real personal data.
 
-Bayanatak is a tiny local CLI that generates Saudi-flavored fake data for product development,
-frontend QA, backend seeds, demos, and test fixtures.
+## Demo
 
-No API.
-No scraping.
-No database.
-No LLM.
-No real personal data.
+![Bayanatak demo](docs/assets/mara-bayanatak-demo.gif)
 
-Just deterministic fake records that look close enough to the local product reality to break the
-things you actually need to fix.
+[MP4 demo](docs/assets/mara-bayanatak-demo.mp4)
 
 ## Install
 
-For now, install from source:
-
 ```bash
 python3 -m pip install -e .
-```
-
-Later, if the package earns it:
-
-```bash
-pip install bayanatak
 ```
 
 ## Quick Start
@@ -51,122 +37,53 @@ PYTHONPATH=src python3 -m bayanatak.cli user --count 5
 
 ## What It Generates
 
-- Fake Arabic names for testing.
-- Safe emails under `example.test`.
-- Saudi cities and neighborhoods.
-- Local-looking addresses.
-- Checkout records with SAR totals, VAT, shipping, and payment method.
-- Form payloads for signup, checkout, and waitlist screens.
-- A clear `is_fake` flag on every record.
+- Fake Arabic names and safe `example.test` emails.
+- Saudi cities, neighborhoods, and local-looking addresses.
+- Checkout records with SAR totals, VAT, shipping, and payment methods.
+- Signup, checkout, and waitlist form payloads.
+- Stable records when you pass `--seed`.
+- An `is_fake` flag on every record.
 
-## The Safety Bit
+## Safety
 
-By default, phone numbers are intentionally not dialable:
+Phone numbers are intentionally not dialable by default:
 
 ```text
 05X0000001
 ```
 
-That is useful for UI, screenshots, demos, and documentation.
-
-If you need digits-only values for local validators, opt in:
+Use digits-only values only when testing local validators:
 
 ```bash
 bayanatak user --phone-mode digits
 ```
 
-Use digits mode for local testing only. Do not call, text, upload, or treat generated values as real
-customer data.
+Do not call, text, upload, or treat generated values as real customer data.
 
-## Output Formats
+## Output
 
 ```bash
 bayanatak user --format table
 bayanatak user --format json
 bayanatak user --format csv
-```
-
-The same generator can feed:
-
-- Frontend mock screens.
-- Backend seed files.
-- QA CSV files.
-- Snapshot tests.
-- Product demos.
-
-## How It Works
-
-Bayanatak ships with small local datasets:
-
-- Arabic test names.
-- Fake test surnames.
-- Saudi cities.
-- Neighborhoods.
-- Streets.
-- Products.
-- Payment methods.
-
-The CLI combines those datasets with Python's local pseudo-random generator.
-
-Add `--seed`, and the output becomes stable:
-
-```bash
 bayanatak checkout --city jeddah --count 10 --seed 42
 ```
 
-Same command, same records. That makes it useful for tests and screenshots where random drift is a
-waste of time.
-
-## Examples
-
-Generate users:
-
-```bash
-bayanatak user --count 3 --city riyadh
-```
-
-Generate checkout data:
-
-```bash
-bayanatak checkout --count 5 --city jeddah --format json
-```
-
-Generate signup form payloads:
-
-```bash
-bayanatak form --type signup --count 10 --format csv
-```
+Use the output for mock screens, backend seeds, QA CSV files, snapshot tests, and product demos.
 
 ## Development
 
 ```bash
-python3 -m unittest discover -s tests
+PYTHONPATH=src python3 -m unittest discover -s tests
 python3 -m compileall src tests
 ```
 
 ## Scope
 
-This is not a legal identity generator, not a production data source, and not a replacement for real
-user research.
-
-It is a development utility for teams building Saudi-facing products and trying not to ship broken
-Arabic forms.
-
-## Roadmap
-
-- More cities and neighborhoods.
-- Arabic date and time scenarios.
-- Saudi business records.
-- UI fixture bundles for common product screens.
-- A tiny web preview if the CLI proves useful.
-
-## Contributing
-
-PRs are welcome if they make the data more useful, safer, or more realistic without crossing into
-real personal data.
+Bayanatak is not a legal identity generator, production data source, or replacement for real user
+research. It is a development utility for teams building Saudi-facing products without using real
+Saudi people as test data.
 
 ## About
 
-This project is maintained under the [mara](https://github.com/mara-org) on GitHub.
-
-Created by [@gqnxx](https://github.com/gqnxx)
+Maintained by [mara](https://github.com/mara-org). Created by [@gqnxx](https://github.com/gqnxx).
