@@ -165,5 +165,8 @@ Arabic forms.
 PRs are welcome if they make the data more useful, safer, or more realistic without crossing into
 real personal data.
 
-Regards,
-The CTO.
+## About
+
+This project is maintained under the [mara](https://github.com/mara-org) on GitHub.
+
+Created by [@gqnxx](https://github.com/gqnxx)
