@@ -12,8 +12,6 @@ No API. No scraping. No database. No LLM. No real personal data.
 
 ![Bayanatak demo](docs/assets/mara-bayanatak-demo.gif)
 
-[MP4 demo](docs/assets/mara-bayanatak-demo.mp4)
-
 ## Install
 
 ```bash
